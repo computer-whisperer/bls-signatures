@@ -7,7 +7,7 @@ include(FetchContent)
 if (DEFINED ENV{RELIC_MAIN})
   set(RELIC_GIT_TAG "origin/main")
 else ()
-  set(RELIC_GIT_TAG "1885ae3b681c423c72b65ce1fe70910142cf941c")
+  set(RELIC_GIT_TAG "3a23142be0a5510a3aa93cd6c76fc59d3fc732a5")
 endif ()
 
 message(STATUS "Relic will be built from: ${RELIC_GIT_TAG}")
@@ -44,8 +44,11 @@ add_library(blstmp ${HEADERS}
 )
 
 set(OPREFIX object_)
-find_library(GMP_NAME NAMES libgmp.a gmp)
-find_library(SODIUM_NAME NAMES libsodium.a sodium)
+set(GMP_NAME /usr/lib/libgmp.a)
+set(SODIUM_NAME /usr/lib/libsodium.a)
+#find_library(GMP_NAME NAMES libgmp.a gmp)
+#find_library(SODIUM_NAME NAMES libsodium.a sodium)
+
 
 set(LIBRARIES_TO_COMBINE
       COMMAND mkdir ${OPREFIX}$<TARGET_NAME:blstmp> || true && cd ${OPREFIX}$<TARGET_NAME:blstmp> &&  ${CMAKE_AR} -x $<TARGET_FILE:blstmp>
